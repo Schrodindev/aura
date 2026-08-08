@@ -23,6 +23,7 @@ export const BIBLIOTECA_AURAS = [
   { id: "fumaca", nome: "💨 Fumaça / Sombra", arquivo: "/aura/fumaca.webm", duracaoSegundos: 4 },
   { id: "cura", nome: "✨ Aura de Cura", arquivo: "/aura/cura.webm", duracaoSegundos: 2.5 },
   { id: "escudo", nome: "🛡️ Escudo Mágico", arquivo: "/aura/escudo.webm", duracaoSegundos: 3 },
+  { id: "circulo_magico", nome: "🛡️ circulo_magico", arquivo: "/aura/circulo_magico.webm", duracaoSegundos: 3 },
   { id: "fogo", nome: "🌋 Fogo Elemental", arquivo: "/aura/fireball.webm", duracaoSegundos: 3 },
   { id: "encantado", nome: "🌋 encantado", arquivo: "/aura/encantado.webm", duracaoSegundos: 4 },
   { id: "eletrico", nome: "⚡ Aura Elétrica", arquivo: "/aura/eletrico.webm", duracaoSegundos: 2 },
