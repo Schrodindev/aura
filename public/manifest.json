@@ -1,0 +1,9 @@
+{
+  "name": "Auras & Efeitos Animados",
+  "version": "1.0.0",
+  "manifest_version": 1,
+  "author": "Seu Nome",
+  "description": "Auras e efeitos animados (.webm) para tokens, com repetição em loop, 1 vez ou quantidade personalizada.",
+  "icon": "/icon.svg",
+  "background_url": "/background.html"
+}

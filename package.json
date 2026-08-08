@@ -1,0 +1,18 @@
+{
+  "name": "owlbear-extensao-auras",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Auras e efeitos visuais animados (.webm) com controle de repeticao para tokens do Owlbear Rodeo",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@owlbear-rodeo/sdk": "^3.1.0"
+  },
+  "devDependencies": {
+    "vite": "^8.2.1"
+  }
+}

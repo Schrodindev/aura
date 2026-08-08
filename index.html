@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auras & Efeitos Animados</title>
+    <style>
+      /* ---------------------------------------------------------------
+         Dark mode embutido. As variaveis sao sobrescritas em tempo de
+         execucao a partir de OBR.theme.getTheme() (main.js).
+      --------------------------------------------------------------- */
+      :root {
+        --fundo: #1e2231;
+        --fundo-2: #262b3d;
+        --fundo-3: #2f3549;
+        --borda: #3b4256;
+        --texto: #e9ebf2;
+        --texto-2: #9aa3bd;
+        --primaria: #7c5cff;
+        --primaria-texto: #ffffff;
+        --perigo: #ef4f6b;
+        --raio: 10px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        color: var(--texto);
+        font-family: "Inter", "Segoe UI", Roboto, system-ui, sans-serif;
+        font-size: 13px;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body {
+        padding: 10px;
+        overflow-x: hidden;
+      }
+
+      /* Scrollbar discreta */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--borda);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      /* ------------------------------ Cabecalho ------------------------------ */
+      .cabecalho {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+      .titulo {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+      }
+      .alvo {
+        font-size: 11px;
+        color: var(--texto-2);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 60%;
+      }
+
+      /* ------------------------------ Secoes ------------------------------ */
+      .secao {
+        margin-bottom: 12px;
+      }
+      .rotulo {
+        display: block;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        color: var(--texto-2);
+        margin-bottom: 6px;
+      }
+
+      /* --------------------- Segmentado (modo de repeticao) --------------------- */
+      .segmentado {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px;
+        background: var(--fundo-2);
+        border: 1px solid var(--borda);
+        border-radius: var(--raio);
+        padding: 4px;
+      }
+      .segmentado button {
+        appearance: none;
+        border: none;
+        background: transparent;
+        color: var(--texto-2);
+        font: inherit;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 7px 4px;
+        border-radius: 7px;
+        cursor: pointer;
+        transition: background 0.12s ease, color 0.12s ease;
+      }
+      .segmentado button:hover {
+        color: var(--texto);
+        background: var(--fundo-3);
+      }
+      .segmentado button[aria-pressed="true"] {
+        background: var(--primaria);
+        color: var(--primaria-texto);
+      }
+
+      /* ------------------------------ Controles ------------------------------ */
+      .linha {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .linha + .linha {
+        margin-top: 8px;
+      }
+      .linha .rotulo {
+        margin: 0;
+        flex: 0 0 auto;
+      }
+      .valor {
+        margin-left: auto;
+        font-size: 11px;
+        font-variant-numeric: tabular-nums;
+        color: var(--texto);
+        background: var(--fundo-3);
+        border-radius: 6px;
+        padding: 2px 7px;
+      }
+
+      input[type="number"] {
+        width: 100%;
+        background: var(--fundo-2);
+        border: 1px solid var(--borda);
+        border-radius: 8px;
+        color: var(--texto);
+        font: inherit;
+        padding: 7px 9px;
+      }
+      input[type="number"]:focus {
+        outline: none;
+        border-color: var(--primaria);
+      }
+
+      input[type="range"] {
+        flex: 1 1 auto;
+        appearance: none;
+        height: 4px;
+        border-radius: 2px;
+        background: var(--fundo-3);
+        outline: none;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        appearance: none;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--primaria);
+        cursor: pointer;
+        border: 2px solid var(--fundo);
+      }
+      input[type="range"]::-moz-range-thumb {
+        width: 14px;
+        height: 14px;
+        border: 2px solid var(--fundo);
+        border-radius: 50%;
+        background: var(--primaria);
+        cursor: pointer;
+      }
+
+      .oculto {
+        display: none !important;
+      }
+
+      /* ------------------------------ Grid de auras ------------------------------ */
+      .grade {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+        gap: 8px;
+      }
+
+      .card {
+        appearance: none;
+        border: 1px solid var(--borda);
+        background: var(--fundo-2);
+        border-radius: var(--raio);
+        padding: 0;
+        overflow: hidden;
+        cursor: pointer;
+        color: var(--texto);
+        text-align: center;
+        transition: border-color 0.12s ease, transform 0.1s ease;
+      }
+      .card:hover {
+        border-color: var(--primaria);
+        transform: translateY(-1px);
+      }
+      .card:active {
+        transform: translateY(0);
+      }
+      .card:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .card .preview {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        background:
+          radial-gradient(circle at 50% 55%, rgba(124, 92, 255, 0.16), transparent 65%),
+          repeating-conic-gradient(var(--fundo-3) 0% 25%, var(--fundo-2) 0% 50%) 50% / 12px 12px;
+        display: block;
+      }
+      .card .preview video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+      .card .preview .faltando {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 9px;
+        line-height: 1.3;
+        color: var(--texto-2);
+        padding: 4px;
+      }
+      .card .nome {
+        display: block;
+        font-size: 10px;
+        font-weight: 600;
+        line-height: 1.25;
+        padding: 6px 4px;
+        word-break: break-word;
+      }
+      .card .badge-ativa {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        background: var(--primaria);
+        color: var(--primaria-texto);
+        font-size: 9px;
+        font-weight: 700;
+        border-radius: 999px;
+        padding: 1px 6px;
+      }
+
+      /* ------------------------------ Auras ativas ------------------------------ */
+      .ativas {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .ativa {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--fundo-2);
+        border: 1px solid var(--borda);
+        border-radius: 8px;
+        padding: 6px 8px;
+        font-size: 11px;
+      }
+      .ativa .ativa-nome {
+        flex: 1 1 auto;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .ativa .ativa-info {
+        color: var(--texto-2);
+        font-variant-numeric: tabular-nums;
+        flex: 0 0 auto;
+      }
+      .ativa .remover {
+        appearance: none;
+        border: none;
+        background: transparent;
+        color: var(--texto-2);
+        cursor: pointer;
+        font-size: 14px;
+        line-height: 1;
+        padding: 2px 4px;
+        border-radius: 5px;
+      }
+      .ativa .remover:hover {
+        background: var(--perigo);
+        color: #fff;
+      }
+
+      .botao-perigo {
+        width: 100%;
+        appearance: none;
+        border: 1px solid var(--borda);
+        background: var(--fundo-2);
+        color: var(--perigo);
+        font: inherit;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 8px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .botao-perigo:hover {
+        background: var(--perigo);
+        color: #fff;
+        border-color: var(--perigo);
+      }
+
+      .vazio {
+        font-size: 11px;
+        color: var(--texto-2);
+        text-align: center;
+        padding: 8px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
