@@ -30,7 +30,7 @@ export const BIBLIOTECA_AURAS = [
   { id: "eletrico", nome: "⚡ Aura Elétrica", arquivo: "/aura/eletrico.webm", duracaoSegundos: 2 },
   { id: "static", nome: "📺 Aura Static", arquivo: "/aura/static.webm", duracaoSegundos: 2 },
 ];
-
+ 
 /** Modos de repeticao suportados. */
 export const MODO = {
   LOOP: "LOOP",
