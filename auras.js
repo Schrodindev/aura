@@ -28,7 +28,7 @@ export const BIBLIOTECA_AURAS = [
   { id: "fogo", nome: "🌋 Fogo Elemental", arquivo: "/aura/fireball.webm", duracaoSegundos: 3 },
   { id: "encantado", nome: "🌋 encantado", arquivo: "/aura/encantado.webm", duracaoSegundos: 4 },
   { id: "eletrico", nome: "⚡ Aura Elétrica", arquivo: "/aura/eletrico.webm", duracaoSegundos: 2 },
-  { id: "static", nome: "📺 Aura Static", arquivo: "/aura/static.webm", duracaoSegundos: 2 },
+  { id: "static", nome: "📺 Aura Statica", arquivo: "/aura/static.webm", duracaoSegundos: 2 },
 ];
  
 /** Modos de repeticao suportados. */
