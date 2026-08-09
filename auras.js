@@ -20,6 +20,7 @@ export const CHAVE_PREFS = `${PLUGIN_ID}/prefs`;
  */
 export const BIBLIOTECA_AURAS = [
   { id: "furia", nome: "🔥 Fúria do Bárbaro", arquivo: "/aura/furia.webm", duracaoSegundos: 7 },
+  { id: "tiro", nome: "🔥 tido", arquivo: "/aura/tiro.webm", duracaoSegundos: 7 },
   { id: "fumaca", nome: "💨 Fumaça / Sombra", arquivo: "/aura/fumaca.webm", duracaoSegundos: 4 },
   { id: "cura", nome: "✨ Aura de Cura", arquivo: "/aura/cura.webm", duracaoSegundos: 2.5 },
   { id: "escudo", nome: "🛡️ Escudo Mágico", arquivo: "/aura/escudo.webm", duracaoSegundos: 3 },
